@@ -1,10 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, FC } from 'react';
 import apiClient from '../../common/api';
 import { IPost } from '../../common/models';
+import './PostsList.css'
 
 // hook - use 
 
-const PostsList = () => {
+interface IProps {
+    getSinglePost: (id: number) => void;
+}
+// FC - function component
+
+const PostsList:FC<IProps> = (props) => {
     // let [count, setCount ] = useState(0);
     // const [state, setState] = useState({name:'text', age: 16}) 
     // const changeUserAge = () => {
@@ -16,7 +22,7 @@ const PostsList = () => {
 
     const getPosts = async () => {
         try {
-            const res = await apiClient.get<IPost[]>('/posts')        
+            const res = await apiClient.get<IPost[]>('/posts')                    
             setPosts(res.data)
         }catch(e) {
             console.log({ e });   
@@ -28,13 +34,29 @@ const PostsList = () => {
     // mount
     useEffect(() => {
         getPosts();
-    }, [])
+        
+        // const interval = setInterval(() => {
+        //     getPosts()
+        // }, 3000)
 
-    // updated
-    useEffect(() => {
-        alert('xD')
-        setIsLoading(true)
-    }, [])
+        // return () => {
+        //     // @ts-ignore
+        //     clearInterval(interval);
+        //     // alert('deleted')
+        // }
+    }, []);
+
+    // // updated
+    // useEffect(() => {
+    //     setIsLoading(true)
+    // }, [posts])
+
+    // // unmounted
+    // useEffect(() => {
+    //     setIsLoading(true)
+
+    //     return () => {}
+    // }, [isLoading])
 
     if(isLoading) {
         return(<h1>LOADING...</h1>)
@@ -42,15 +64,13 @@ const PostsList = () => {
 
     return (
         <div>
-            {
-                posts.map(post => (
-                    <div key={post.id}>
-                        <h4>{post.title}</h4>
-                        <p>{post.body}</p>
-                    </div>
-                ))
-
-            }
+            {posts.map(post => (
+                <div key={post.id} className='post-item'>
+                    <h4>{post.title}</h4>
+                    <p>{post.body}</p>
+                    <button onClick={() => props.getSinglePost(post.id)}>View</button>
+                </div>
+            ))}
 
             {/* <h1>Count: {count}</h1>
             <button onClick={()=> {
