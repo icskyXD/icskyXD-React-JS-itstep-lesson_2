@@ -1,12 +1,13 @@
 import React, { FC, useState, useEffect } from 'react';
 import apiClient from '../../common/api';
 import { IPost } from '../../common/models';
-import { IPostId } from '../../App'
-const SinglePost:FC<IPostId> = (props) => {
+// import { IPostId } from '../../App'
+
+const SinglePost:FC = (props) => {
     const [post, setPost] = useState<IPost[]>([])    
     
     const getPost = async () => {
-        const postObj = await apiClient.get<IPost[]>(`/posts/${props.id}`);
+        const postObj = await apiClient.get<IPost[]>(`/posts`);
         setPost(postObj.data)
     }
 
@@ -16,10 +17,10 @@ const SinglePost:FC<IPostId> = (props) => {
     
     return (
             <div>
-                <p>UserId: {post.userId}</p>
+                {/* <p>UserId: {post.userId}</p>
                 <p>Id: {post.id}</p>
                 <h1>{post.title}</h1>
-                <p>{post.body}</p>
+                <p>{post.body}</p> */}
             </div>
             )
 }

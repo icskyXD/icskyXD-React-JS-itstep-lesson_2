@@ -1,12 +1,13 @@
 import React, { useState, useEffect, FC } from 'react';
 import apiClient from '../../common/api';
+import { Link } from 'react-router-dom'
 import { IPost } from '../../common/models';
 import './PostsList.css'
 
 // hook - use 
 
 interface IProps {
-    getSinglePost: (id: number) => void;
+    onClickPost: (id: number) => void;
 }
 // FC - function component
 
@@ -68,7 +69,8 @@ const PostsList:FC<IProps> = (props) => {
                 <div key={post.id} className='post-item'>
                     <h4>{post.title}</h4>
                     <p>{post.body}</p>
-                    <button onClick={() => props.getSinglePost(post.id)}>View</button>
+                    <Link to={`/posts/${post.id}`}>View</Link>
+                    <button onClick={() => props.onClickPost(post.id)}>View</button>
                 </div>
             ))}
 
