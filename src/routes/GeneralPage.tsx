@@ -8,8 +8,10 @@ const GeneralPage = () => {
     return (
     <>
     <header>
-        <Link to='/'>General</Link> <br/>
-        <Link to='/posts'>Posts</Link>
+        <Link to='/People'>People</Link> <br/>
+        <Link to='/Starships'>Starships</Link> <br/>
+        <Link to='/Planets'>Planets</Link> <br/>
+        {/* <Link to='/posts'>Posts</Link> */}
     </header>
         <div>
             <Outlet/>

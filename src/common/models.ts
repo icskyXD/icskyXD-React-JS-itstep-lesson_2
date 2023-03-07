@@ -13,3 +13,14 @@ export interface IPost {
     id: number,
     userId: number
 }
+
+export interface IPeople {
+    name: string,
+    height: string,
+    mass: string,
+    hair_color: string,
+    skin_color: string,
+    eye_color: string,
+    birth_year: string,
+    url: string,
+}

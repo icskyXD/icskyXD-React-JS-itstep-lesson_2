@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import apiClient from '../common/api';
 
 // const obj:Record<number | string, boolean> = {
@@ -10,6 +10,7 @@ import apiClient from '../common/api';
 const SinglePostPage = () => {
     const { postId } = useParams<string>()
     const [post, setPost] = useState({title:''})
+    const navigate = useNavigate()
 
     const getPost = async (id:number) => {
         const res = await apiClient.get(`/posts/${id}`)
@@ -25,9 +26,9 @@ const SinglePostPage = () => {
     
     return (
         <div>
+            <button onClick={()=>navigate('/posts')}></button>
             <h1>Single Post Page</h1>
             {/* @ts-ignore */}
-            <h2>{post.id}</h2>
             <h2>{post.title}</h2>
         </div>
     )
